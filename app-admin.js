@@ -45,7 +45,7 @@ document.getElementById("logoutBtn").onclick = async () => {
 async function enterAdmin() {
   document.getElementById("loginWrap").style.display = "none";
   document.getElementById("adminShell").style.display = "flex";
-  await Promise.all([loadContent(), loadCategories(), loadSiteSettings(), loadWithdrawals(), loadNotifications(), loadNetworks(), loadPlacements(), loadPages(), loadMessages()]);
+  await Promise.all([loadContent(), loadCategories(), loadSiteSettings(), loadWithdrawals(), loadNotifications(), loadNetworks(), loadPlacements(), loadPages(), loadMessages(), loadUsers(), loadActivity()]);
 }
 
 // Auto-login if session already exists (so refresh doesn't log you out)
@@ -626,11 +626,22 @@ async function loadMessages() {
   if (dot) dot.style.display = unread ? "inline-block" : "none";
 
   list.innerHTML = data.map(m => `
-    <div class="notif-item ${m.read ? "" : "unread"}">
-      <strong>${escapeHtml(m.name || "Anonymous")}</strong> ${m.email ? "(" + escapeHtml(m.email) + ")" : ""}<br>
-      ${escapeHtml(m.message)}
+    <div class="notif-item ${m.read ? "" : "unread"}" style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+      <div>
+        <strong>${escapeHtml(m.name || "Anonymous")}</strong> ${m.email ? "(" + escapeHtml(m.email) + ")" : ""}<br>
+        ${escapeHtml(m.message)}
+      </div>
+      <button class="btn danger" style="flex-shrink:0;padding:4px 10px;" data-delete-message="${m.id}" title="Delete">✕</button>
     </div>
   `).join("");
+
+  list.querySelectorAll("[data-delete-message]").forEach(btn => {
+    btn.onclick = async () => {
+      const { error } = await supabase.from("contact_messages").delete().eq("id", btn.dataset.deleteMessage);
+      if (error) { showToast("Could not delete: " + error.message); return; }
+      loadMessages();
+    };
+  });
 
   const unreadIds = data.filter(m => !m.read).map(m => m.id);
   if (unreadIds.length) {
@@ -639,8 +650,66 @@ async function loadMessages() {
   }
 }
 
+// ============================================================
+// USERS (with country flag) + LIVE ACTIVITY FEED
+// ============================================================
+function flagEmoji(countryCode) {
+  if (!countryCode || countryCode.length !== 2) return "🌐";
+  const codePoints = [...countryCode.toUpperCase()].map(c => 0x1F1E6 + (c.charCodeAt(0) - 65));
+  return String.fromCodePoint(...codePoints);
+}
+
+async function loadUsers() {
+  const { data, error } = await supabase.from("profiles").select("*").order("created_at", { ascending: false });
+  const list = document.getElementById("usersList");
+  if (!list) return;
+  if (error) { list.innerHTML = `<p class="helper">Could not load users.</p>`; return; }
+  if (!data || !data.length) { list.innerHTML = `<p class="helper">No users yet.</p>`; return; }
+
+  list.innerHTML = data.map(u => `
+    <div class="content-card">
+      <div class="content-card-info">
+        <div class="content-card-title">${flagEmoji(u.country_code)} ${escapeHtml(u.full_name || "Unnamed user")}</div>
+        <div class="content-card-meta">${escapeHtml(u.email || "")} · ${escapeHtml(u.country_name || "Unknown country")} · Balance: ${Number(u.wallet_balance || 0).toFixed(2)}</div>
+      </div>
+    </div>`).join("");
+}
+
+async function loadActivity() {
+  const { data, error } = await supabase
+    .from("ad_events")
+    .select("*, profiles(full_name, country_code, country_name)")
+    .order("created_at", { ascending: false })
+    .limit(30);
+  const list = document.getElementById("activityList");
+  if (!list) return;
+  if (error) { list.innerHTML = `<p class="helper">Could not load activity.</p>`; return; }
+  if (!data || !data.length) { list.innerHTML = `<p class="helper">No ad activity yet.</p>`; return; }
+
+  list.innerHTML = data.map(e => {
+    const user = e.profiles || {};
+    const time = new Date(e.created_at).toLocaleTimeString();
+    return `<div class="notif-item">
+      ${flagEmoji(user.country_code)} <strong>${escapeHtml(user.full_name || "Unknown user")}</strong>
+      — ${escapeHtml(e.event_type)} ${e.earned_amount > 0 ? "(+" + Number(e.earned_amount).toFixed(4) + ")" : ""}
+      <span style="color:#97A2BE;font-size:12px;"> · ${escapeHtml(user.country_name || "")} · ${time}</span>
+    </div>`;
+  }).join("");
+}
+
+// Live updates: whenever a new ad_event comes in, refresh the feed
+// automatically — this is what makes "Recent Activity" feel live
+// instead of needing a manual page refresh.
+supabase
+  .channel("admin-activity-feed")
+  .on("postgres_changes", { event: "INSERT", schema: "public", table: "ad_events" }, () => {
+    loadActivity();
+  })
+  .subscribe();
+
 function escapeHtml(str) {
   return String(str || "").replace(/[&<>"']/g, m => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[m]));
 }
+
