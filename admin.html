@@ -1,4 +1,3 @@
-<meta charset="UTF-8">
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,291 +12,303 @@
 
 <!-- LOGIN -->
 <div class="login-wrap" id="loginWrap">
-  <div class="login-card">
-    <h1 class="display">FAMB Earn</h1>
-    <p>Admin panel — sign in to manage content, withdrawals & settings.</p>
-    <div class="form-group"><label>Email</label><input type="email" id="loginEmail"></div>
-    <div class="form-group"><label>Password</label><input type="password" id="loginPassword"></div>
-    <button class="btn primary" id="loginBtn" style="width:100%;">Log in</button>
-    <p id="loginError" style="color:#E0665A;font-size:13px;margin-top:10px;"></p>
-  </div>
+  <div class="login-card">
+    <h1 class="display">FAMB Earn</h1>
+    <p>Admin panel — sign in to manage content, withdrawals & settings.</p>
+    <div class="form-group"><label>Email</label><input type="email" id="loginEmail"></div>
+    <div class="form-group"><label>Password</label><input type="password" id="loginPassword"></div>
+    <button class="btn primary" id="loginBtn" style="width:100%;">Log in</button>
+    <p id="loginError" style="color:#E0665A;font-size:13px;margin-top:10px;"></p>
+  </div>
 </div>
 
 <!-- ADMIN SHELL -->
 <div class="admin-shell" id="adminShell" style="display:none;">
-  <aside class="sidebar">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-      <h2 class="display" style="margin:0;font-size:20px;">FAMB Earn</h2>
-      <button class="theme-toggle" id="themeToggle" title="Toggle dark/light" aria-label="Toggle dark/light"></button>
-    </div>
-    <div class="side-link active" data-panel="panelContent">Content</div>
-    <div class="side-link" data-panel="panelAdd">Add Content</div>
-    <div class="side-link" data-panel="panelWithdrawals">Withdrawals <span id="withdrawDot" style="display:none;" class="notif-dot"></span></div>
-    <div class="side-link" data-panel="panelNotifications">Notifications <span id="notifDot" style="display:none;" class="notif-dot"></span></div>
-    <div class="side-link" data-panel="panelSite">App Branding</div>
-    <div class="side-link" data-panel="panelAds">Ads</div>
-    <div class="side-link" data-panel="panelRules">Earning Rules</div>
-    <div class="side-link" data-panel="panelPages">Pages</div>
-    <div class="side-link" data-panel="panelMessages">Messages <span id="messagesDot" style="display:none;" class="notif-dot"></span></div>
-    <div class="side-link" id="logoutBtn" style="margin-top:20px;color:#E0665A;">Log out</div>
-  </aside>
+  <aside class="sidebar">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <h2 class="display" style="margin:0;font-size:20px;">FAMB Earn</h2>
+      <button class="theme-toggle" id="themeToggle" title="Toggle dark/light" aria-label="Toggle dark/light"></button>
+    </div>
+    <div class="side-link active" data-panel="panelContent">Content</div>
+    <div class="side-link" data-panel="panelAdd">Add Content</div>
+    <div class="side-link" data-panel="panelWithdrawals">Withdrawals <span id="withdrawDot" style="display:none;" class="notif-dot"></span></div>
+    <div class="side-link" data-panel="panelNotifications">Notifications <span id="notifDot" style="display:none;" class="notif-dot"></span></div>
+    <div class="side-link" data-panel="panelSite">App Branding</div>
+    <div class="side-link" data-panel="panelAds">Ads</div>
+    <div class="side-link" data-panel="panelRules">Earning Rules</div>
+    <div class="side-link" data-panel="panelPages">Pages</div>
+    <div class="side-link" data-panel="panelMessages">Messages <span id="messagesDot" style="display:none;" class="notif-dot"></span></div>
+    <div class="side-link" data-panel="panelUsers">Users</div>
+    <div class="side-link" id="logoutBtn" style="margin-top:20px;color:#E0665A;">Log out</div>
+  </aside>
 
-  <main class="main">
+  <main class="main">
 
-    <!-- CONTENT LIST -->
-    <section class="panel active" id="panelContent">
-      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Your Content</h2>
-      <div id="contentList"></div>
-    </section>
+    <!-- CONTENT LIST -->
+    <section class="panel active" id="panelContent">
+      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Your Content</h2>
+      <div id="contentList"></div>
+    </section>
 
-    <!-- ADD CONTENT -->
-    <section class="panel" id="panelAdd">
-      <h2 class="display" style="font-size:24px;margin-bottom:16px;" id="formHeading">Add Content</h2>
-      <div class="form-card">
+    <!-- ADD CONTENT -->
+    <section class="panel" id="panelAdd">
+      <h2 class="display" style="font-size:24px;margin-bottom:16px;" id="formHeading">Add Content</h2>
+      <div class="form-card">
 
-        <div class="form-group">
-          <label>Title</label>
-          <input type="text" id="contentTitle" placeholder="e.g. 5 tips to save electricity this summer">
-        </div>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" id="contentTitle" placeholder="e.g. 5 tips to save electricity this summer">
+        </div>
 
-        <div class="form-group">
-          <label>Content type</label>
-          <select id="contentType">
-            <option value="article">Article</option>
-            <option value="news">News</option>
-            <option value="video">Video</option>
-            <option value="photo">Photo</option>
-          </select>
-        </div>
+        <div class="form-group">
+          <label>Content type</label>
+          <select id="contentType">
+            <option value="article">Article</option>
+            <option value="news">News</option>
+            <option value="video">Video</option>
+            <option value="photo">Photo</option>
+          </select>
+        </div>
 
-        <div class="form-group">
-          <label>Category</label>
-          <input type="text" id="contentCategory" list="categoryOptions" placeholder="Type or pick: Tech, Entertainment, Health...">
-          <datalist id="categoryOptions"></datalist>
-          <div class="helper">Type a new category (it'll be created automatically) or pick from existing ones below.</div>
-          <div class="chip-row" id="categoryChips"></div>
-        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" id="contentCategory" list="categoryOptions" placeholder="Type or pick: Tech, Entertainment, Health...">
+          <datalist id="categoryOptions"></datalist>
+          <div class="helper">Type a new category (it'll be created automatically) or pick from existing ones below.</div>
+          <div class="chip-row" id="categoryChips"></div>
+        </div>
 
-        <div class="form-group">
-          <label>Photos & videos — upload from device</label>
-          <input type="file" id="mediaUpload" multiple accept="image/*,video/*">
-          <div class="media-preview" id="mediaPreview"></div>
-        </div>
+        <div class="form-group">
+          <label>Photos & videos — upload from device</label>
+          <input type="file" id="mediaUpload" multiple accept="image/*,video/*">
+          <div class="media-preview" id="mediaPreview"></div>
+        </div>
 
-        <div class="form-group">
-          <label>Or add photo/video by link</label>
-          <div style="display:flex;gap:8px;">
-            <input type="text" id="mediaLinkInput" placeholder="https:// or YouTube link">
-            <button class="btn" id="addMediaLink" type="button">Add</button>
-          </div>
-        </div>
+        <div class="form-group">
+          <label>Or add photo/video by link</label>
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="mediaLinkInput" placeholder="https:// or YouTube link">
+            <button class="btn" id="addMediaLink" type="button">Add</button>
+          </div>
+        </div>
 
-        <div class="form-group">
-          <label>Description / Article body</label>
-          <textarea id="contentDescription" rows="7" placeholder="Write the full article / caption / description here — this is what the user reads. Any link (https://...) typed here becomes clickable automatically."></textarea>
-        </div>
+        <div class="form-group">
+          <label>Description / Article body</label>
+          <textarea id="contentDescription" rows="7" placeholder="Write the full article / caption / description here — this is what the user reads. Any link (https://...) typed here becomes clickable automatically."></textarea>
+        </div>
 
-        <div class="form-group">
-          <label>Call-to-action link (optional)</label>
-          <div style="display:flex;gap:8px;">
-            <input type="text" id="contentActionLink" placeholder="https://example.com/signup" style="flex:2;">
-            <input type="text" id="contentActionLabel" placeholder="Button text, e.g. Sign Up Now" style="flex:1;">
-          </div>
-          <div class="helper">Agar ye bhara ho, content ke detail page par ek clickable button dikhega jo user ko is link par redirect karega — jaise exchange/platform promotion ke liye "Sign Up Now" button.</div>
-        </div>
+        <div class="form-group">
+          <label>Call-to-action link (optional)</label>
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="contentActionLink" placeholder="https://example.com/signup" style="flex:2;">
+            <input type="text" id="contentActionLabel" placeholder="Button text, e.g. Sign Up Now" style="flex:1;">
+          </div>
+          <div class="helper">Agar ye bhara ho, content ke detail page par ek clickable button dikhega jo user ko is link par redirect karega — jaise exchange/platform promotion ke liye "Sign Up Now" button.</div>
+        </div>
 
-        <button class="btn primary" id="publishBtn" style="margin-top:10px;">Publish</button>
-        <span id="editingIdNote" style="display:none;color:#97A2BE;font-size:12px;margin-left:10px;"></span>
-      </div>
-    </section>
+        <button class="btn primary" id="publishBtn" style="margin-top:10px;">Publish</button>
+        <span id="editingIdNote" style="display:none;color:#97A2BE;font-size:12px;margin-left:10px;"></span>
+      </div>
+    </section>
 
-    <!-- WITHDRAWALS -->
-    <section class="panel" id="panelWithdrawals">
-      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Withdrawal Requests</h2>
-      <div id="withdrawalsList"></div>
-    </section>
+    <!-- WITHDRAWALS -->
+    <section class="panel" id="panelWithdrawals">
+      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Withdrawal Requests</h2>
+      <div id="withdrawalsList"></div>
+    </section>
 
-    <!-- NOTIFICATIONS -->
-    <section class="panel" id="panelNotifications">
-      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Notifications</h2>
-      <div id="notifList"></div>
-    </section>
+    <!-- NOTIFICATIONS -->
+    <section class="panel" id="panelNotifications">
+      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Notifications</h2>
+      <div id="notifList"></div>
+    </section>
 
-    <!-- APP BRANDING -->
-    <section class="panel" id="panelSite">
-      <h2 class="display" style="font-size:24px;margin-bottom:16px;">App Branding & Social Links</h2>
-      <div class="form-card">
-        <div class="form-group"><label>App logo</label><input type="file" id="siteLogoInput" accept="image/*">
-          <div id="logoPreviewWrap" style="margin-top:8px;"><img id="logoPreviewImg" style="width:48px;height:48px;border-radius:8px;object-fit:cover;display:none;"></div>
-        </div>
-        <div class="form-group"><label>App name</label><input type="text" id="siteNameInput" placeholder="FAMB Earn"></div>
-        <div class="form-group"><label>Banner headline (shown on app home)</label><input type="text" id="bannerTitleInput"></div>
-        <div class="form-group"><label>Banner subheading</label><input type="text" id="bannerSubtitleInput"></div>
+    <!-- APP BRANDING -->
+    <section class="panel" id="panelSite">
+      <h2 class="display" style="font-size:24px;margin-bottom:16px;">App Branding & Social Links</h2>
+      <div class="form-card">
+        <div class="form-group"><label>App logo</label><input type="file" id="siteLogoInput" accept="image/*">
+          <div id="logoPreviewWrap" style="margin-top:8px;"><img id="logoPreviewImg" style="width:48px;height:48px;border-radius:8px;object-fit:cover;display:none;"></div>
+        </div>
+        <div class="form-group"><label>App name</label><input type="text" id="siteNameInput" placeholder="FAMB Earn"></div>
+        <div class="form-group"><label>Banner headline (shown on app home)</label><input type="text" id="bannerTitleInput"></div>
+        <div class="form-group"><label>Banner subheading</label><input type="text" id="bannerSubtitleInput"></div>
 
-        <div class="form-group">
-          <label>Facebook link</label>
-          <input type="text" id="facebookInput">
-          <label class="show-toggle"><input type="checkbox" id="facebookShow" checked> Show this link in app</label>
-        </div>
-        <div class="form-group">
-          <label>Instagram link</label>
-          <input type="text" id="instagramInput">
-          <label class="show-toggle"><input type="checkbox" id="instagramShow" checked> Show this link in app</label>
-        </div>
-        <div class="form-group">
-          <label>TikTok link</label>
-          <input type="text" id="tiktokInput">
-          <label class="show-toggle"><input type="checkbox" id="tiktokShow" checked> Show this link in app</label>
-        </div>
-        <div class="form-group">
-          <label>WhatsApp / Support link</label>
-          <input type="text" id="whatsappInput">
-          <label class="show-toggle"><input type="checkbox" id="whatsappShow" checked> Show this link in app</label>
-        </div>
-        <button class="btn primary" id="saveSiteBtn">Save branding</button>
-      </div>
-    </section>
+        <div class="form-group">
+          <label>Facebook link</label>
+          <input type="text" id="facebookInput">
+          <label class="show-toggle"><input type="checkbox" id="facebookShow" checked> Show this link in app</label>
+        </div>
+        <div class="form-group">
+          <label>Instagram link</label>
+          <input type="text" id="instagramInput">
+          <label class="show-toggle"><input type="checkbox" id="instagramShow" checked> Show this link in app</label>
+        </div>
+        <div class="form-group">
+          <label>TikTok link</label>
+          <input type="text" id="tiktokInput">
+          <label class="show-toggle"><input type="checkbox" id="tiktokShow" checked> Show this link in app</label>
+        </div>
+        <div class="form-group">
+          <label>WhatsApp / Support link</label>
+          <input type="text" id="whatsappInput">
+          <label class="show-toggle"><input type="checkbox" id="whatsappShow" checked> Show this link in app</label>
+        </div>
+        <button class="btn primary" id="saveSiteBtn">Save branding</button>
+      </div>
+    </section>
 
-    <!-- ADS -->
-    <section class="panel" id="panelAds">
-      <h2 class="display" style="font-size:24px;margin-bottom:6px;">Ad Networks & Placements</h2>
-      <p class="helper" style="margin-bottom:20px;">Pehle ek "Network" add karein (jaise AdMob, ya koi bhi network jo aapko code diya ho), phir ek "Placement" add karein jo batata hai wo ad KAHAN aur KAB show hogi.</p>
+    <!-- ADS -->
+    <section class="panel" id="panelAds">
+      <h2 class="display" style="font-size:24px;margin-bottom:6px;">Ad Networks & Placements</h2>
+      <p class="helper" style="margin-bottom:20px;">Pehle ek "Network" add karein (jaise AdMob, ya koi bhi network jo aapko code diya ho), phir ek "Placement" add karein jo batata hai wo ad KAHAN aur KAB show hogi.</p>
 
-      <div class="form-card" style="margin-bottom:24px;">
-        <h3 style="margin-top:0;font-size:16px;">Add Ad Network</h3>
-        <div class="form-group">
-          <label>Network name</label>
-          <input type="text" id="networkName" placeholder="e.g. AdMob Rewarded, PropellerAds Banner">
-        </div>
-        <div class="form-group">
-          <label>Network type</label>
-          <select id="networkType">
-            <option value="sdk">SDK-based (AdMob/Unity — uses an Ad Unit ID)</option>
-            <option value="code_snippet">Code snippet (network gave you HTML/JS/iframe code)</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Ad format</label>
-          <select id="networkAdFormat">
-            <option value="rewarded_video">Rewarded video (user watches, earns coins)</option>
-            <option value="banner">Banner (small strip, always visible, no watching needed)</option>
-            <option value="interstitial">Interstitial (full-screen between actions, no reward)</option>
-          </select>
-          <div class="helper">Har ad unit ek hi format ka hota hai — banner ke liye alag network row banayein, rewarded video ke liye alag.</div>
-        </div>
-        <div class="form-group" id="adUnitWrap">
-          <label>Ad Unit ID</label>
-          <input type="text" id="networkAdUnitId" placeholder="e.g. ca-app-pub-xxxx/yyyy">
-        </div>
-        <div class="form-group" id="htmlCodeWrap" style="display:none;">
-          <label>Paste the network's ad code</label>
-          <textarea id="networkHtmlCode" rows="5" placeholder="<script>...</script> or <iframe>...</iframe> — exactly as the network gave it to you"></textarea>
-        </div>
-        <div class="form-group">
-          <label>Estimated eCPM (earning per 1000 completed views)</label>
-          <div style="display:flex;gap:8px;">
-            <input type="number" id="networkCpm" placeholder="e.g. 1" style="flex:2;">
-            <select id="networkCurrency" style="flex:1;">
-              <option value="USD">USD</option>
-              <option value="PKR">PKR</option>
-              <option value="USDT">USDT</option>
-            </select>
-          </div>
-          <div class="helper">Ye ek estimate hai (network ki dashboard se lekar khud daalein) — isi se user ka coin-earning calculate hoga.</div>
-        </div>
-        <button class="btn primary" id="addNetworkBtn">Add network</button>
-      </div>
+      <div class="form-card" style="margin-bottom:24px;">
+        <h3 style="margin-top:0;font-size:16px;">Add Ad Network</h3>
+        <div class="form-group">
+          <label>Network name</label>
+          <input type="text" id="networkName" placeholder="e.g. AdMob Rewarded, PropellerAds Banner">
+        </div>
+        <div class="form-group">
+          <label>Network type</label>
+          <select id="networkType">
+            <option value="sdk">SDK-based (AdMob/Unity — uses an Ad Unit ID)</option>
+            <option value="code_snippet">Code snippet (network gave you HTML/JS/iframe code)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ad format</label>
+          <select id="networkAdFormat">
+            <option value="rewarded_video">Rewarded video (user watches, earns coins)</option>
+            <option value="banner">Banner (small strip, always visible, no watching needed)</option>
+            <option value="interstitial">Interstitial (full-screen between actions, no reward)</option>
+          </select>
+          <div class="helper">Har ad unit ek hi format ka hota hai — banner ke liye alag network row banayein, rewarded video ke liye alag.</div>
+        </div>
+        <div class="form-group" id="adUnitWrap">
+          <label>Ad Unit ID</label>
+          <input type="text" id="networkAdUnitId" placeholder="e.g. ca-app-pub-xxxx/yyyy">
+        </div>
+        <div class="form-group" id="htmlCodeWrap" style="display:none;">
+          <label>Paste the network's ad code</label>
+          <textarea id="networkHtmlCode" rows="5" placeholder="<script>...</script> or <iframe>...</iframe> — exactly as the network gave it to you"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Estimated eCPM (earning per 1000 completed views)</label>
+          <div style="display:flex;gap:8px;">
+            <input type="number" id="networkCpm" placeholder="e.g. 1" style="flex:2;">
+            <select id="networkCurrency" style="flex:1;">
+              <option value="USD">USD</option>
+              <option value="PKR">PKR</option>
+              <option value="USDT">USDT</option>
+            </select>
+          </div>
+          <div class="helper">Ye ek estimate hai (network ki dashboard se lekar khud daalein) — isi se user ka coin-earning calculate hoga.</div>
+        </div>
+        <button class="btn primary" id="addNetworkBtn">Add network</button>
+      </div>
 
-      <div id="networksList" style="margin-bottom:32px;"></div>
+      <div id="networksList" style="margin-bottom:32px;"></div>
 
-      <div class="form-card" style="margin-bottom:24px;">
-        <h3 style="margin-top:0;font-size:16px;">Add Ad Placement (where + when it shows)</h3>
-        <div class="form-group">
-          <label>Use which network?</label>
-          <select id="placementNetwork"></select>
-        </div>
-        <div class="form-group">
-          <label>Placement name</label>
-          <input type="text" id="placementName" placeholder="e.g. Home popup ad">
-        </div>
-        <div class="form-group">
-          <label>Location</label>
-          <select id="placementLocation">
-            <option value="auto_rotate">Auto-rotate (shows by itself, no button — cycles automatically)</option>
-            <option value="popup">Popup (full screen)</option>
-            <option value="feed_banner">Banner inside content feed</option>
-            <option value="between_listings">Between every few listings</option>
-            <option value="content_bottom">Bottom of a listing/article page</option>
-            <option value="dashboard_top">Top of user dashboard</option>
-          </select>
-          <div class="helper">"Auto-rotate" ka matlab hai: user ko koi button dabana nahi padega, app khud background mein ye ad (aur agar aisi aur placements bhi hon to unke sath baari-baari) automatically dikhati rahegi, "Show after N seconds" ke interval par.</div>
-        </div>
-        <div class="form-group">
-          <label>Message shown to user (optional)</label>
-          <input type="text" id="placementCta" placeholder="e.g. Watch this ad to earn coins">
-        </div>
-        <div class="form-group">
-          <label>Show after every N feed items (only for feed/between-listings)</label>
-          <input type="number" id="placementEveryN" placeholder="e.g. 3">
-        </div>
-        <div class="form-group">
-          <label>Show after N seconds (only for popup)</label>
-          <input type="number" id="placementAfterSec" placeholder="e.g. 10">
-        </div>
-        <div class="form-group">
-          <label>Cooldown — don't repeat for same user (minutes)</label>
-          <input type="number" id="placementCooldown" placeholder="e.g. 15">
-        </div>
-        <button class="btn primary" id="addPlacementBtn">Add placement</button>
-      </div>
+      <div class="form-card" style="margin-bottom:24px;">
+        <h3 style="margin-top:0;font-size:16px;">Add Ad Placement (where + when it shows)</h3>
+        <div class="form-group">
+          <label>Use which network?</label>
+          <select id="placementNetwork"></select>
+        </div>
+        <div class="form-group">
+          <label>Placement name</label>
+          <input type="text" id="placementName" placeholder="e.g. Home popup ad">
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <select id="placementLocation">
+            <option value="auto_rotate">Auto-rotate (shows by itself, no button — cycles automatically)</option>
+            <option value="popup">Popup (full screen)</option>
+            <option value="feed_banner">Banner inside content feed</option>
+            <option value="between_listings">Between every few listings</option>
+            <option value="content_bottom">Bottom of a listing/article page</option>
+            <option value="dashboard_top">Top of user dashboard</option>
+          </select>
+          <div class="helper">"Auto-rotate" ka matlab hai: user ko koi button dabana nahi padega, app khud background mein ye ad (aur agar aisi aur placements bhi hon to unke sath baari-baari) automatically dikhati rahegi, "Show after N seconds" ke interval par.</div>
+        </div>
+        <div class="form-group">
+          <label>Message shown to user (optional)</label>
+          <input type="text" id="placementCta" placeholder="e.g. Watch this ad to earn coins">
+        </div>
+        <div class="form-group">
+          <label>Show after every N feed items (only for feed/between-listings)</label>
+          <input type="number" id="placementEveryN" placeholder="e.g. 3">
+        </div>
+        <div class="form-group">
+          <label>Show after N seconds (only for popup)</label>
+          <input type="number" id="placementAfterSec" placeholder="e.g. 10">
+        </div>
+        <div class="form-group">
+          <label>Cooldown — don't repeat for same user (minutes)</label>
+          <input type="number" id="placementCooldown" placeholder="e.g. 15">
+        </div>
+        <button class="btn primary" id="addPlacementBtn">Add placement</button>
+      </div>
 
-      <div id="placementsList"></div>
-    </section>
+      <div id="placementsList"></div>
+    </section>
 
-    <!-- EARNING RULES -->
-    <section class="panel" id="panelRules">
-      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Earning Rules</h2>
-      <div class="form-card">
-        <p class="helper" style="margin-bottom:16px;">Yeh values seedha app mein reflect hongi — sab users ke liye ek sath apply hoti hain.</p>
-        <div class="form-group">
-          <label>Referral bonus (coins per successful referral)</label>
-          <input type="number" id="referralBonusInput" placeholder="e.g. 5">
-        </div>
-        <div class="form-group">
-          <label>Minimum withdrawal amount (Rs.)</label>
-          <input type="number" id="minWithdrawInput" placeholder="e.g. 500">
-        </div>
-        <div class="form-group">
-          <label>User's share of ad earnings (%)</label>
-          <input type="number" id="userShareInput" placeholder="e.g. 45" min="0" max="100">
-          <div class="helper">Aapne bataya tha 40-50% — is range mein koi bhi number daal sakte hain.</div>
-        </div>
-        <div class="form-group">
-          <label>Default currency shown to users</label>
-          <select id="defaultCurrencyInput">
-            <option value="PKR">PKR</option>
-            <option value="USD">USD</option>
-            <option value="USDT">USDT</option>
-          </select>
-        </div>
-        <button class="btn primary" id="saveRulesBtn">Save rules</button>
-      </div>
-    </section>
+    <!-- EARNING RULES -->
+    <section class="panel" id="panelRules">
+      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Earning Rules</h2>
+      <div class="form-card">
+        <p class="helper" style="margin-bottom:16px;">Yeh values seedha app mein reflect hongi — sab users ke liye ek sath apply hoti hain.</p>
+        <div class="form-group">
+          <label>Referral bonus (coins per successful referral)</label>
+          <input type="number" id="referralBonusInput" placeholder="e.g. 5">
+        </div>
+        <div class="form-group">
+          <label>Minimum withdrawal amount (Rs.)</label>
+          <input type="number" id="minWithdrawInput" placeholder="e.g. 500">
+        </div>
+        <div class="form-group">
+          <label>User's share of ad earnings (%)</label>
+          <input type="number" id="userShareInput" placeholder="e.g. 45" min="0" max="100">
+          <div class="helper">Aapne bataya tha 40-50% — is range mein koi bhi number daal sakte hain.</div>
+        </div>
+        <div class="form-group">
+          <label>Default currency shown to users</label>
+          <select id="defaultCurrencyInput">
+            <option value="PKR">PKR</option>
+            <option value="USD">USD</option>
+            <option value="USDT">USDT</option>
+          </select>
+        </div>
+        <button class="btn primary" id="saveRulesBtn">Save rules</button>
+      </div>
+    </section>
 
-    <!-- PAGES -->
-    <section class="panel" id="panelPages">
-      <h2 class="display" style="font-size:24px;margin-bottom:6px;">App Pages</h2>
-      <p class="helper" style="margin-bottom:20px;">Ye pages seedha app mein (menu se) khulte hain. Jo bhi likhenge, wahi user ko dikhega — koi code change nahi chahiye.</p>
-      <div id="pagesEditorWrap"></div>
-    </section>
+    <!-- PAGES -->
+    <section class="panel" id="panelPages">
+      <h2 class="display" style="font-size:24px;margin-bottom:6px;">App Pages</h2>
+      <p class="helper" style="margin-bottom:20px;">Ye pages seedha app mein (menu se) khulte hain. Jo bhi likhenge, wahi user ko dikhega — koi code change nahi chahiye.</p>
+      <div id="pagesEditorWrap"></div>
+    </section>
 
-    <!-- MESSAGES (Contact Us submissions) -->
-    <section class="panel" id="panelMessages">
-      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Contact Messages</h2>
-      <div id="messagesList"></div>
-    </section>
+    <!-- MESSAGES (Contact Us submissions) -->
+    <section class="panel" id="panelMessages">
+      <h2 class="display" style="font-size:24px;margin-bottom:16px;">Contact Messages</h2>
+      <div id="messagesList"></div>
+    </section>
 
-  </main>
+    <!-- USERS -->
+    <section class="panel" id="panelUsers">
+      <h2 class="display" style="font-size:24px;margin-bottom:6px;">Users</h2>
+      <p class="helper" style="margin-bottom:20px;">Har user ka naam, country (jahan se signup hua), aur balance. "Recent Activity" us jagah ko dikhata hai jahan se log abhi ads dekh rahe hain — auto-update hota hai.</p>
+
+      <div id="usersList" style="margin-bottom:32px;"></div>
+
+      <h3 style="font-size:16px;">Recent Ad Activity <span style="color:#6FA582;font-weight:400;font-size:12px;">● live</span></h3>
+      <div id="activityList" style="margin-top:12px;"></div>
+    </section>
+
+  </main>
 </div>
 
 <div id="toastHost"></div>
@@ -305,5 +316,6 @@
 <script type="module" src="app-admin.js"></script>
 </body>
 </html>
+
 
 
